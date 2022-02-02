@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, View, Text, StyleSheet, Platform, Button, Alert } from 'react-native';
-
+import Appstyles from './styles/main.scss';
 import Task from './components/Task';
 
 export default class App extends Component {
@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     paddingBottom: 0
   }
+  
 })
 
 

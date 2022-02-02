@@ -16,6 +16,14 @@ export default class Task extends Component {
                 <Text className='task-title'>{this.props.taskName}</Text>
                 <Text className='task-time'>{this.props.elapsedTime}</Text>
                 <Button title='' onPress={this.props.startStop}></Button>
+                <div className='task-grippy-group'>
+                    <div className='task-grippy'></div>
+                    <div className='task-grippy'></div>
+                    <div className='task-grippy'></div>
+                    <div className='task-grippy'></div>
+                    <div className='task-grippy'></div>
+                    <div className='task-grippy'></div>
+                </div>
             </View>
         )
     }
