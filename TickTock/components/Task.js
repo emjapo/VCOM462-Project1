@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
 import { AppRegistry, View, Text, StyleSheet, Platform, Button, Alert } from 'react-native';
+import PropTypes from 'prop-types';
 
 
 export default class Task extends Component {
-    // static propTypes = {
-    //     containerStyle: PropTypes.style,
-    //     style: PropTypes.style,
-    //     autoFocus: PropTypes.bool,
-    //     editbale: PropTypes.bool,
-    //     textColor: PropTypes.string,
-    //     onChangeText: PropTypes.func,
-    //     value: PropTypes.string,
-    //     placeholder: PropTypes.string,
-    // }
+    static propTypes = {
+        taskName: PropTypes.string,
+        startStop: PropTypes.func,
+    };
 
     render() {
         return(
-            <View>
-                <Text>Hello</Text>
+            <View className="task">
+                <Text className='task-title'>{this.props.taskName}</Text>
+                <Button title='' onPress={this.props.startStop}></Button>
             </View>
         )
     }

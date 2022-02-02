@@ -82,9 +82,9 @@ export default class App extends Component {
         <View>
           <Text style={styles.daysText}>{this.state.currentDay}</Text>
           <Text style={styles.timeText}>{this.state.currentTime}</Text>
-          <Button title='Start' onPress={() => this.startTime()} />
-          <Button title='Stop' onPress={() => this.stopTime()} />
-          <Task />
+          {/* <Button title='Start' onPress={() => this.startTime()} />
+          <Button title='Stop' onPress={() => this.stopTime()} /> */}
+          <Task taskName='Homework' startStop={() => this.stopTime()} />
         </View>
       </View>
     );
