@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { AppRegistry, View, Text, StyleSheet, Platform, Button, Alert } from 'react-native';
 
+import Task from './components/Task';
+
 export default class App extends Component {
 
   constructor() {
@@ -82,6 +84,7 @@ export default class App extends Component {
           <Text style={styles.timeText}>{this.state.currentTime}</Text>
           <Button title='Start' onPress={() => this.startTime()} />
           <Button title='Stop' onPress={() => this.stopTime()} />
+          <Task />
         </View>
       </View>
     );
