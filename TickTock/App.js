@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, View, Text, StyleSheet, Platform, Button, Alert } from 'react-native';
 import Appstyles from './styles/main.scss';
+import { NavigationContainer } from '@react-navigation/native';
 import Task from './components/Task';
 
 export default class App extends Component {
@@ -78,15 +79,17 @@ export default class App extends Component {
   render() {
 
     return (
-      <View style={styles.container}>
-        <View>
-          <Text style={styles.daysText}>{this.state.currentDay}</Text>
-          <Text style={styles.timeText}>{this.state.currentTime}</Text>
-          {/* <Button title='Start' onPress={() => this.startTime()} />
-          <Button title='Stop' onPress={() => this.stopTime()} /> */}
-          <Task taskName='Homework' startStop={() => this.stopTime()} elapsedTime='54 min' />
+      <NavigationContainer>
+        <View style={styles.container}>
+          <View>
+            <Text style={styles.daysText}>{this.state.currentDay}</Text>
+            <Text style={styles.timeText}>{this.state.currentTime}</Text>
+            {/* <Button title='Start' onPress={() => this.startTime()} />
+            <Button title='Stop' onPress={() => this.stopTime()} /> */}
+            <Task taskName='Homework' startStop={() => this.stopTime()} elapsedTime='54 min' />
+          </View>
         </View>
-      </View>
+      </NavigationContainer>
     );
   }
 }
