@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     color: '#cccccc',
     fontSize: 25,
     paddingBottom: 0
-  }
+  },
 })
 
 
