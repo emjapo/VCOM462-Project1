@@ -3,6 +3,7 @@ import { AppRegistry, View, Text, StyleSheet, Platform, Button, Alert, Touchable
 import PropTypes from 'prop-types';
 
 
+
 export default class Task extends Component {
     static propTypes = {
         taskName: PropTypes.string,

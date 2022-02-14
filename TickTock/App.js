@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { AppRegistry, View, Text, StyleSheet, Platform, Button, Alert } from 'react-native';
 
 import Task from './components/Task';
+import TaskCollection from './api/TaskCollection';
+import firestore from '@react-native-firebase/firestore';
+import TaskList from './components/TaskList';
+
 
 export default class App extends Component {
 
@@ -84,7 +88,7 @@ export default class App extends Component {
           <Text style={styles.timeText}>{this.state.currentTime}</Text>
           {/* <Button title='Start' onPress={() => this.startTime()} />
           <Button title='Stop' onPress={() => this.stopTime()} /> */}
-          <Task taskName='Homework' startStop={() => this.stopTime()} elapsedTime='54 min' />
+          <TaskList />
         </View>
       </View>
     );
