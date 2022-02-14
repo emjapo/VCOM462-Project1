@@ -69,6 +69,7 @@ export default class App extends Component {
   }
 
   stopTime() {
+  console.log("stop")
     let stopDate = new Date();
     this.setState({ stopTime: { hours: stopDate.getHours(), minutes: stopDate.getMinutes(), seconds: stopDate.getSeconds() } }, () => {
       Alert.alert('It has been ' + (this.state.stopTime.hours - this.state.startTime.hours) + ':' + (this.state.stopTime.minutes - this.state.startTime.minutes) + ':' + (this.state.stopTime.seconds - this.state.startTime.seconds));
@@ -85,6 +86,7 @@ export default class App extends Component {
           {/* <Button title='Start' onPress={() => this.startTime()} />
           <Button title='Stop' onPress={() => this.stopTime()} /> */}
           <Task taskName='Homework' startStop={() => this.stopTime()} elapsedTime='54 min' />
+
         </View>
       </View>
     );
@@ -93,10 +95,10 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "gray",
+    backgroundColor: '#F3F0E9',
     padding: 32,
   },
+
   bodyText: {
     fontFamily: "sans-serif",
     fontSize: 32,
@@ -111,10 +113,10 @@ const styles = StyleSheet.create({
   },
   timeText: {
     fontSize: 50,
-    color: '#ffffff'
+    color: '#466874'
   },
   daysText: {
-    color: '#cccccc',
+    color: '#986D4D',
     fontSize: 25,
     paddingBottom: 0
   },
