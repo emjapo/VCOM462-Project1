@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Text, StyleSheet, Platform, Button, ImageBackground, Alert, TouchableOpacity, } from 'react-native';
+import { AppRegistry, View, Text, StyleSheet, Platform, Button, Alert, TouchableOpacity, } from 'react-native';
 import PropTypes from 'prop-types';
 
 
@@ -13,7 +13,6 @@ export default class Task extends Component {
 
     render() {
         return(
-             <ImageBackground source={require('../img/grid.png')}style={styles.image}>
             <View style={styles.taskContainer}>
                 <View style={styles.task}>
                     <View>
@@ -39,7 +38,6 @@ export default class Task extends Component {
 
                 </View>
             </View>
-            </ImageBackground>
         )
     }
 }
@@ -50,11 +48,6 @@ const styles = StyleSheet.create({
         flexWrap: "wrap",
 
     },
-    image: {
-        width: '100%',
-        height: '100%',
-        backgroundColor: '#F3F0E9'
-     },
     task: {
         backgroundColor: "#F28B66",
         borderRadius: 5,

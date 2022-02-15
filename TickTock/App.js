@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Text, StyleSheet, Platform, Button, Alert } from 'react-native';
+import { AppRegistry, View, Text, StyleSheet, Platform, Button, Alert, ImageBackground, } from 'react-native';
 
 import Task from './components/Task';
 import TaskCollection from './api/TaskCollection';
@@ -83,6 +83,7 @@ export default class App extends Component {
   render() {
 
     return (
+      <ImageBackground source={require('./img/grid.png')}style={styles.image}>
       <View style={styles.container}>
         <View>
           <Text style={styles.daysText}>{this.state.currentDay}</Text>
@@ -92,6 +93,7 @@ export default class App extends Component {
           <TaskList />
         </View>
       </View>
+      </ImageBackground>
     );
   }
 }
@@ -123,6 +125,11 @@ const styles = StyleSheet.create({
     fontSize: 25,
     paddingBottom: 0
   },
+  image: {
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#F3F0E9'
+     },
 })
 
 

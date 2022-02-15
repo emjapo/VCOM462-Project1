@@ -33,7 +33,7 @@ export default class TaskList extends Component {
             <View>
                 <FlatList
                     data={this.state.tasks}
-                    renderItem={({item}) => <Task taskName={item.name} startStop={() => Alert()} elapsedTime={item.goal} />}
+                    renderItem={({item}) => <Task taskName={item.name} startStop={() => console.log("start time")} elapsedTime={item.goal} />}
                 />
             </View>
         );

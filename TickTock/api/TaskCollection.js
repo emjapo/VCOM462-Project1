@@ -13,4 +13,14 @@ firestore()
     console.log('User added!');
   });
 
+  firestore()
+  .collection('Tasks')
+  .add({
+    name: 'Research',
+    goal: 20,
+  })
+  .then(() => {
+    console.log('User added!');
+  });
+
 export default TaskCollection;
