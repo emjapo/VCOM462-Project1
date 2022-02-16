@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Task from './Task';
 import TaskCollection from '../api/TaskCollection';
 import firestore from '@react-native-firebase/firestore';
+import addTask from '../api/AddTaskToDB';
 
 
 export default class TaskList extends Component {
@@ -15,17 +16,24 @@ export default class TaskList extends Component {
         console.log("hello");
   }
 
+  // gets data from Database
   async getTasks() {
-      console.log("before async");
-    let tasksfromDB = await firestore().collection('Tasks').get(); 
-    console.log("the tasks:", tasksfromDB);
-    let newTasks = [];
-    tasksfromDB.forEach(task => {
-        console.log(task._data);
-        newTasks.push(task._data);
-    })
-
-    this.setState({ tasks : newTasks });
+    // useEffect(() => {
+    //     const subscriber = firestore()
+    firestore()
+        .collection('Tasks')
+        .get()
+        .then(querySnapshot => {
+            console.log('Total tasks: ', querySnapshot.size);
+            let newTasks = [];
+            querySnapshot.forEach(documentSnapshot => {
+            console.log('Tasks: ', documentSnapshot.id, documentSnapshot.data());
+            newTasks.push(documentSnapshot.data());
+            });
+            this.setState({ tasks : newTasks });
+        });
+    //     return () => subscriber();
+    // }, [userId]);
   }
 
     render() {
