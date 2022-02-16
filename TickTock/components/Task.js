@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Text, StyleSheet, Platform, Button, Alert, TouchableOpacity } from 'react-native';
+import { AppRegistry, View, Text, StyleSheet, Platform, Button, Alert, TouchableOpacity, } from 'react-native';
 import PropTypes from 'prop-types';
+
 
 
 export default class Task extends Component {
@@ -8,19 +9,21 @@ export default class Task extends Component {
         taskName: PropTypes.string,
         startStop: PropTypes.func,
         elaspsedTime: PropTypes.string,
+        color: PropTypes.string
     };
 
     render() {
         return(
             <View style={styles.taskContainer}>
-                <View style={styles.task}>
+                <View style={[styles.task, {backgroundColor: this.props.color}]}>
                     <View>
                     <Text style={styles.taskTitle}>{this.props.taskName}</Text>
-                    <Text style={styles.taskTime}>{this.props.elapsedTime}</Text>
+                    <Text style={styles.ElapsedTime}>{this.props.elapsedTime}</Text>
                     </View>
-                    <TouchableOpacity style={styles.button} onPress={this.props.startStop}>
+                    <TouchableOpacity style={styles.button} onPress={this.props.startStop}  >
                         <Text style={styles.taskTime}>Start</Text>
                     </TouchableOpacity>
+
                     <View style={styles.taskGrippyGroup}>
                         <View style={styles.taskGrippyCol}>
                             <View style={styles.taskGrippy}></View>
@@ -33,6 +36,7 @@ export default class Task extends Component {
                             <View style={styles.taskGrippy}></View>
                         </View>
                     </View>
+
                 </View>
             </View>
         )
@@ -43,45 +47,71 @@ const styles = StyleSheet.create({
     taskContainer: {
         flexDirection: 'row',
         flexWrap: "wrap",
+
     },
     task: {
-        backgroundColor: "red",
+        // backgroundColor: "#F28B66",
         borderRadius: 5,
-        width: "80%",
-        height: 200,
+        width: "100%",
+        height: 100,
         flexDirection: 'row',
         flexWrap: "wrap",
+        padding: 5,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#fff',
     }, 
     taskTitle: {
-        fontWeight: "bold",
+        fontSize: 30,
+        marginTop: 12,
+        fontWeight: 'bold',
+        color: 'white',
 
     },
     taskTime: {
+        color: '#466874',
         width: 100,
+        fontSize: 20,
+        paddingLeft: 17,
+        paddingTop: 25
 
     },
+    ElapsedTime: {
+        color: 'white',
+        width: 100,
+        paddingLeft: 5
+    },
     button: {
-        width: 40,
-        backgroundColor: "yellow",
-        flex: 2,
+
+        borderRadius: 100,
+        width: 80,
+        height: 80,
+        marginLeft: 50,
+        marginTop: 5,
+        backgroundColor: "white",
+
     },
     taskGrippyGroup: {
-        backgroundColor: "pink",
+
         flex: 3,
         flexDirection: 'row',
         flexWrap: 'wrap',
         alignItems: 'flex-end',
-        width: "20%"
+        width: "10%",
+        height: "10%"
     },
     taskGrippyCol: {
-        width: 22,
-        backgroundColor: "green",
+        paddingTop: 30,
+        paddingLeft: 10,
+        flexDirection: 'column',
+        width: 15,
+
     },
     taskGrippy: {
         padding: 2,
-        width: 20,
-        height: 20,
+        width: 10,
+        height: 10,
         borderRadius: 10,
-        backgroundColor: "blue",
+        backgroundColor: "#F2724F",
     },
 })
