@@ -18,6 +18,7 @@ export default class TaskList extends Component {
 
   // gets data from Database
   async getTasks() {
+    //   addTask("Recess", 75, "#F28B66");
     // useEffect(() => {
     //     const subscriber = firestore()
     firestore()
@@ -41,7 +42,7 @@ export default class TaskList extends Component {
             <View>
                 <FlatList
                     data={this.state.tasks}
-                    renderItem={({item}) => <Task taskName={item.name} startStop={() => console.log("start time")} elapsedTime={item.goal} />}
+                    renderItem={({item}) => <Task taskName={item.name} startStop={() => console.log("start time")} elapsedTime={item.goal} color={item.color} />}
                 />
             </View>
         );

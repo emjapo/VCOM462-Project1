@@ -9,12 +9,13 @@ export default class Task extends Component {
         taskName: PropTypes.string,
         startStop: PropTypes.func,
         elaspsedTime: PropTypes.string,
+        color: PropTypes.string
     };
 
     render() {
         return(
             <View style={styles.taskContainer}>
-                <View style={styles.task}>
+                <View style={[styles.task, {backgroundColor: this.props.color}]}>
                     <View>
                     <Text style={styles.taskTitle}>{this.props.taskName}</Text>
                     <Text style={styles.ElapsedTime}>{this.props.elapsedTime}</Text>
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
 
     },
     task: {
-        backgroundColor: "#F28B66",
+        // backgroundColor: "#F28B66",
         borderRadius: 5,
         width: "100%",
         height: 100,
