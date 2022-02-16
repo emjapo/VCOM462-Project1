@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Text, StyleSheet, Platform, Button, Alert, ImageBackground, } from 'react-native';
-
+import { AppRegistry, View, Text, StyleSheet, Platform, Button, ImageBackground, SafeAreaView, Alert, TextInput, onChangeText, TouchableOpacity  } from 'react-native';
+import AddTask from './components/AddTask';
 import Task from './components/Task';
 import TaskCollection from './api/TaskCollection';
 
@@ -32,8 +32,8 @@ function MyStack ()  {
  }
 
 
-export default class App extends Component {
 
+export default class App extends Component {
   constructor() {
     super();
 
@@ -70,6 +70,11 @@ export default class App extends Component {
     if (new Date().getHours() < 12) {
       am_pm = 'am';
     }
+
+    this.setState({ currentTime: hour + ':' + minutes + ':' + seconds + ' ' + am_pm });
+
+    this.daysArray.map((item, key) => {
+      if (key == new Date().getDay()) {
 
     this.setState({ currentTime: hour + ':' + minutes + ':' + seconds + ' ' + am_pm });
 
@@ -115,7 +120,7 @@ export default class App extends Component {
       <ImageBackground source={require('./img/grid.png')}style={styles.image}>
 	  <NavigationContainer>
 		<MyStack/>
-	</NavigationContainer>
+	 </NavigationContainer>
       <View style={styles.container}>
         <View>
           <Text style={styles.daysText}>{this.state.currentDay}</Text>

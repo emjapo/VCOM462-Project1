@@ -18,6 +18,8 @@
     "react": "17.0.2",
     "react-native": "0.67.0",
     "react-native-draggable-flatlist": "^3.0.5",
+    "react-native-form-component": "^2.2.4",
+    "react-native-label": "^0.0.1-alpha.1",
     "react-native-gesture-handler": "^2.2.0",
     "react-native-safe-area-context": "^3.4.0",
     "react-native-screens": "^3.11.1",
