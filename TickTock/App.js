@@ -1,106 +1,125 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Text, StyleSheet, Platform, Button, Alert } from 'react-native';
-
+import { Form, FormItem } from 'react-native-form-component';
+import { AppRegistry, View, Text, StyleSheet, Platform, Button, ImageBackground, SafeAreaView, Alert, TextInput, onChangeText, TouchableOpacity  } from 'react-native';
 import Task from './components/Task';
 
-export default class App extends Component {
 
-  constructor() {
-    super();
 
-    this.state = { currentTime: null, currentDay: null, startTime: { hours: null, minutes: null, seconds: null }, stopTime: { hours: null, minutes: null, seconds: null} }
-    this.daysArray = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-  }
-
-  componentWillMount() {
-    this.getCurrentTime();
-  }
-
-  getCurrentTime = () => {
-    let hour = new Date().getHours();
-    let minutes = new Date().getMinutes();
-    let seconds = new Date().getSeconds();
-    let am_pm = 'pm';
-
-    if (minutes < 10) {
-      minutes = '0' + minutes;
-    }
-
-    if (seconds < 10) {
-      seconds = '0' + seconds;
-    }
-
-    if (hour > 12) {
-      hour = hour - 12;
-    }
-
-    if (hour == 0) {
-      hour = 12;
-    }
-
-    if (new Date().getHours() < 12) {
-      am_pm = 'am';
-    }
-
-    this.setState({ currentTime: hour + ':' + minutes + ':' + seconds + ' ' + am_pm });
-
-    this.daysArray.map((item, key) => {
-      if (key == new Date().getDay()) {
-        this.setState({ currentDay: item.toUpperCase() });
-      }
-    })
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
-
-  componentDidMount() {
-    this.timer = setInterval(() => {
-      this.getCurrentTime();
-    }, 1000);
-  }
-
-  startTime() {
-    let date = new Date();
-    this.setState({ startTime: { hours: date.getHours(), minutes: date.getMinutes(), seconds: date.getSeconds() } }, () => {
-      Alert.alert('start time: ' + this.state.startTime.hours + ":" + this.state.startTime.minutes + ":" + this.state.startTime.seconds);
-    });
-  }
-
-  stopTime() {
-    let stopDate = new Date();
-    this.setState({ stopTime: { hours: stopDate.getHours(), minutes: stopDate.getMinutes(), seconds: stopDate.getSeconds() } }, () => {
-      Alert.alert('It has been ' + (this.state.stopTime.hours - this.state.startTime.hours) + ':' + (this.state.stopTime.minutes - this.state.startTime.minutes) + ':' + (this.state.stopTime.seconds - this.state.startTime.seconds));
-    });
-  }
-
-  render() {
-
+const UselessTextInput = () => {
+  const [text, onChangeText] = React.useState("Useless Text");
+  const [number, onChangeNumber] = React.useState(null);
     return (
+      <ImageBackground source={require('./img/grid.png')}style={styles.image}>
       <View style={styles.container}>
         <View>
-          <Text style={styles.daysText}>{this.state.currentDay}</Text>
-          <Text style={styles.timeText}>{this.state.currentTime}</Text>
-          {/* <Button title='Start' onPress={() => this.startTime()} />
-          <Button title='Stop' onPress={() => this.stopTime()} /> */}
-          <Task taskName='Homework' startStop={() => this.stopTime()} elapsedTime='54 min' />
+            <TextInput
+
+                      // Adding hint in Text Input using Place holder.
+                      placeholder="Task Name"
+
+                      onChangeText={TextInputName => this.setState({TextInputName})}
+
+
+
+                      style={styles.input}
+                    />
+
+                    <TextInput
+
+                      // Adding hint in Text Input using Place holder.
+                      placeholder="Goal Time"
+
+                      onChangeText={TextInputEmail => this.setState({TextInputEmail})}
+
+                      keyboardType= "numeric"
+
+                      style={styles.input}
+                    />
+                      <View style={styles.color}>
+                       <Text style={styles.text}>
+                       Color </Text>
+                      <View style={styles.ColorButtonsTop}>
+                        <TouchableOpacity style={styles.orange}
+                                  onPress={() => Alert.alert('(I am a Button)')}>
+
+                         </TouchableOpacity>
+                          <TouchableOpacity style={styles.orange}
+                                  onPress={() => Alert.alert('(I am a Button)')}>
+
+                          </TouchableOpacity>
+
+                          <TouchableOpacity style={styles.orange}
+                                   onPress={() => Alert.alert('(I am a Button)')}>
+
+                                    </TouchableOpacity>
+                           </View>
+                           <View style={styles.ColorButtonsBot}>
+                          <TouchableOpacity style={styles.orange}
+                                     onPress={() => Alert.alert('(I am a Button)')}>
+
+                                     </TouchableOpacity>
+                          <TouchableOpacity style={styles.orange}
+                                     onPress={() => Alert.alert('(I am a Button)')}>
+
+                                     </TouchableOpacity>
+                          <TouchableOpacity style={styles.orange}
+                                     onPress={() => Alert.alert('(I am a Button)')}>
+
+                                     </TouchableOpacity>
+
+
+
+                      </View>
+
+
+                    </View>
+
+                    <Button title="Insert Text Input Data to Server" onPress={() => Alert.alert('(I am Dying)')} color="#2196F3" />
+
+
+
         </View>
       </View>
+      </ImageBackground>
     );
-  }
+
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "gray",
+
     padding: 32,
   },
-  bodyText: {
+  ColorButtonsTop: {
+    backgroundColor: "white",
+    margin: "10%",
+    padding: "10%",
+    flexDirection: "row",
+    justifyContent: "center"
+
+    },
+  ColorButtonsBot: {
+    backgroundColor: "white",
+
+     flexDirection: "row"
+
+        },
+   orange: {
+    backgroundColor: '#F2724F',
+    width:80,
+    height:80,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#fff'
+   },
+  text: {
     fontFamily: "sans-serif",
-    fontSize: 32,
-    color: "white",
+    fontSize: 18,
+    color: "gray",
+  },
+  form: {
+   color: "black"
   },
   headerText: {
     fontSize: 30,
@@ -109,15 +128,23 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: "bold"
   },
-  timeText: {
-    fontSize: 50,
-    color: '#ffffff'
-  },
-  daysText: {
-    color: '#cccccc',
-    fontSize: 25,
-    paddingBottom: 0
-  },
-})
+    image: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: "#F3F0E9",
+
+    },
+    input: {
+    color: "white",
+    backgroundColor: "#B0C7D9",
+    margin: "5%",
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#fff'
+    },
+
+
+});
+export default UselessTextInput;
 
 
