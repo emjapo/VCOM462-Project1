@@ -6,6 +6,8 @@ import Task from './Task';
 import TaskCollection from '../api/TaskCollection';
 import firestore from '@react-native-firebase/firestore';
 import addTask from '../api/AddTaskToDB';
+import { addTime } from '../api/UpdateTask';
+import { updateTask } from '../api/UpdateTask';
 
 
 export default class TaskList extends Component {
@@ -18,9 +20,7 @@ export default class TaskList extends Component {
 
   // gets data from Database
   async getTasks() {
-      // addTask("Recess", 75, "#F28B66");
-    // useEffect(() => {
-    //     const subscriber = firestore()
+
     firestore()
         .collection('Tasks')
         .get()
@@ -33,8 +33,6 @@ export default class TaskList extends Component {
             });
             this.setState({ tasks : newTasks });
         });
-    //     return () => subscriber();
-    // }, [userId]);
   }
 
     render() {
