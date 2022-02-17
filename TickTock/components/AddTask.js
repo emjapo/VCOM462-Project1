@@ -43,26 +43,26 @@ const AddTask = () => {
                                   onPress={() => Alert.alert('(I am a Button)')}>
 
                          </TouchableOpacity>
-                          <TouchableOpacity style={styles.orange}
+                          <TouchableOpacity style={styles.yellow}
                                   onPress={() => Alert.alert('(I am a Button)')}>
 
                           </TouchableOpacity>
 
-                          <TouchableOpacity style={styles.orange}
+                          <TouchableOpacity style={styles.blue}
                                    onPress={() => Alert.alert('(I am a Button)')}>
 
                                     </TouchableOpacity>
                            </View>
                            <View style={styles.ColorButtonsBot}>
-                          <TouchableOpacity style={styles.orange}
+                          <TouchableOpacity style={styles.DarkBlue}
                                      onPress={() => Alert.alert('(I am a Button)')}>
 
                                      </TouchableOpacity>
-                          <TouchableOpacity style={styles.orange}
+                          <TouchableOpacity style={styles.mint}
                                      onPress={() => Alert.alert('(I am a Button)')}>
 
                                      </TouchableOpacity>
-                          <TouchableOpacity style={styles.orange}
+                          <TouchableOpacity style={styles.DarkGreen}
                                      onPress={() => Alert.alert('(I am a Button)')}>
 
                                      </TouchableOpacity>
@@ -74,7 +74,7 @@ const AddTask = () => {
 
                     </View>
 
-                    <Button title="Insert Text Input Data to Server" onPress={() => Alert.alert('(I am Dying)')} color="#2196F3" />
+                    <Button title="Insert Text Input Data to Server" onPress={() => Alert.alert('(I am Dying)')} color="#466874" />
 
 
 
@@ -91,18 +91,25 @@ const styles = StyleSheet.create({
 
     padding: 32,
   },
+
   ColorButtonsTop: {
     backgroundColor: "white",
     margin: "10%",
     padding: "10%",
     flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "center",
+
 
     },
   ColorButtonsBot: {
     backgroundColor: "white",
+    justifyContent: "center",
+     flexDirection: "row",
+     margin: "10%",
+     marginTop: "-20%",
+     paddingBottom: "10%",
 
-     flexDirection: "row"
+
 
         },
    orange: {
@@ -113,6 +120,46 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#fff'
    },
+    yellow: {
+       backgroundColor: '#F1C48D',
+       width:80,
+       height:80,
+       borderRadius: 10,
+       borderWidth: 1,
+       borderColor: '#fff'
+      },
+       blue: {
+          backgroundColor: '#B0C7D9',
+          width:80,
+          height:80,
+          borderRadius: 10,
+          borderWidth: 1,
+          borderColor: '#fff'
+         },
+          DarkBlue: {
+             backgroundColor: '#466874',
+             width:80,
+             height:80,
+             borderRadius: 10,
+             borderWidth: 1,
+             borderColor: '#fff'
+            },
+             mint: {
+                backgroundColor: '#B8D9C6',
+                width:80,
+                height:80,
+                borderRadius: 10,
+                borderWidth: 1,
+                borderColor: '#fff'
+               },
+                DarkGreen: {
+                   backgroundColor: '#61756C',
+                   width:80,
+                   height:80,
+                   borderRadius: 10,
+                   borderWidth: 1,
+                   borderColor: '#fff'
+                  },
   text: {
     fontFamily: "sans-serif",
     fontSize: 18,
