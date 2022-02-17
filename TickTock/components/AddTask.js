@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, FormItem } from 'react-native-form-component';
-import { AppRegistry, View, Text, StyleSheet, Platform, Button, ImageBackground, SafeAreaView, Alert, TextInput, onChangeText, TouchableOpacity  } from 'react-native';
+import { AppRegistry, View, Text, StyleSheet, Platform, Button, ImageBackground, SafeAreaView, Alert, TextInput, onChangeText, TouchableOpacity } from 'react-native';
 import Task from './Task';
 
 
@@ -8,45 +8,47 @@ import Task from './Task';
 const AddTask = () => {
   const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
-    return (
-      <ImageBackground source={require('./../img/grid.png')}style={styles.image}>
+  return (
+    <ImageBackground source={require('./../img/grid.png')} style={styles.image}>
       <View style={styles.container}>
         <View>
-            <TextInput
+          <TextInput
 
-                      // Adding hint in Text Input using Place holder.
-                      placeholder="Task Name"
+            // Adding hint in Text Input using Place holder.
+            placeholder="Task Name"
 
-                      onChangeText={TextInputName => this.setState({TextInputName})}
+            onChangeText={TextInputName => this.setState({ TextInputName })}
 
 
 
-                      style={styles.input}
-                    />
+            style={styles.input}
+          />
 
-                    <TextInput
+          <TextInput
 
-                      // Adding hint in Text Input using Place holder.
-                      placeholder="Goal Time"
+            // Adding hint in Text Input using Place holder.
+            placeholder="Goal Time"
 
-                      onChangeText={TextInputEmail => this.setState({TextInputEmail})}
+            onChangeText={TextInputEmail => this.setState({ TextInputEmail })}
 
-                      keyboardType= "numeric"
+            keyboardType="numeric"
 
-                      style={styles.input}
-                    />
-                      <View style={styles.color}>
-                       <Text style={styles.text}>
-                       Color </Text>
-                      <View style={styles.ColorButtonsTop}>
-                        <TouchableOpacity style={styles.orange}
-                                  onPress={() => Alert.alert('(I am a Button)')}>
+            style={styles.input}
+          />
+          <View style={styles.color}>
+            <Text style={styles.text}>
+              Color </Text>
+            <View style={styles.ColorButtonsTop}>
+              <TouchableOpacity style={styles.orange}
+                onPress={() => Alert.alert('(I am a Button)')}>
+
 
                          </TouchableOpacity>
                           <TouchableOpacity style={styles.yellow}
                                   onPress={() => Alert.alert('(I am a Button)')}>
 
-                          </TouchableOpacity>
+              </TouchableOpacity>
+
 
                           <TouchableOpacity style={styles.blue}
                                    onPress={() => Alert.alert('(I am a Button)')}>
@@ -76,12 +78,10 @@ const AddTask = () => {
 
                     <Button title="Insert Text Input Data to Server" onPress={() => Alert.alert('(I am Dying)')} color="#466874" />
 
-
-
         </View>
       </View>
-      </ImageBackground>
-    );
+    </ImageBackground>
+  );
 
 }
 
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
 
 
-    },
+  },
   ColorButtonsBot: {
     backgroundColor: "white",
     justifyContent: "center",
@@ -111,14 +111,16 @@ const styles = StyleSheet.create({
 
 
 
-        },
-   orange: {
+
+  },
+  orange: {
     backgroundColor: '#F2724F',
-    width:80,
-    height:80,
+    width: 80,
+    height: 80,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#fff'
+
    },
     yellow: {
        backgroundColor: '#F1C48D',
@@ -160,13 +162,14 @@ const styles = StyleSheet.create({
                    borderWidth: 1,
                    borderColor: '#fff'
                   },
+
   text: {
     fontFamily: "sans-serif",
     fontSize: 18,
     color: "gray",
   },
   form: {
-   color: "black"
+    color: "black"
   },
   headerText: {
     fontSize: 30,
@@ -175,20 +178,20 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: "bold"
   },
-    image: {
+  image: {
     width: '100%',
     height: '100%',
     backgroundColor: "#F3F0E9",
 
-    },
-    input: {
+  },
+  input: {
     color: "white",
     backgroundColor: "#B0C7D9",
     margin: "5%",
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#fff'
-    },
+  },
 
 
 });
