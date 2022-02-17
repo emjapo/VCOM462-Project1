@@ -3,8 +3,33 @@ import { AppRegistry, View, Text, StyleSheet, Platform, Button, Alert, ImageBack
 
 import Task from './components/Task';
 import TaskCollection from './api/TaskCollection';
+
 import firestore from '@react-native-firebase/firestore';
 import TaskList from './components/TaskList';
+
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+
+const Stack = createStackNavigator();
+
+function AboutScreen({ navigation }) {
+  return (
+    <View>
+      <Button
+        title="Go to About"
+        onPress={() => navigation.navigate('About')}
+      />
+    </View>
+  );
+}
+
+function MyStack ()  {
+	return(
+		<Stack.Navigator>
+			<Stack.Screen name="About" component={AboutScreen} />
+		</Stack.Navigator>
+	);
+ }
 
 
 export default class App extends Component {
@@ -79,11 +104,18 @@ export default class App extends Component {
       Alert.alert('It has been ' + (this.state.stopTime.hours - this.state.startTime.hours) + ':' + (this.state.stopTime.minutes - this.state.startTime.minutes) + ':' + (this.state.stopTime.seconds - this.state.startTime.seconds));
     });
   }
+  
+
+	
+	
 
   render() {
 
-    return (
+    return (	
       <ImageBackground source={require('./img/grid.png')}style={styles.image}>
+	  <NavigationContainer>
+		<MyStack/>
+	</NavigationContainer>
       <View style={styles.container}>
         <View>
           <Text style={styles.daysText}>{this.state.currentDay}</Text>
