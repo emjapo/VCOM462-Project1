@@ -6,27 +6,35 @@ import TaskCollection from './api/TaskCollection';
 
 import firestore from '@react-native-firebase/firestore';
 import TaskList from './components/TaskList';
+import TaskHome from './components/pages/TaskHome';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 
-function AboutScreen({ navigation }) {
+function NavigateScreens({ navigation }) {
   return (
     <View>
       <Button
-        title="Go to About"
-        onPress={() => navigation.navigate('About')}
+        title="Go to Add Task"
+        onPress={() => navigation.navigate('AddTask')}
+      />
+      <Button
+        title="Go to Task Home"
+        onPress={() => navigation.navigate('TaskHome')}
       />
     </View>
   );
 }
 
+
 function MyStack ()  {
 	return(
 		<Stack.Navigator>
-			<Stack.Screen name="About" component={AboutScreen} />
+      <Stack.Screen name="Navigation" component={NavigateScreens} />
+			<Stack.Screen name="TaskHome" component={TaskHome} />
+      <Stack.Screen name='AddTask' component={AddTask} ></Stack.Screen>
 		</Stack.Navigator>
 	);
  }
@@ -113,23 +121,30 @@ export default class App extends Component {
   render() {
 
     return (	
-      <ImageBackground source={require('./img/grid.png')}style={styles.image}>
 	  <NavigationContainer>
 		<MyStack/>
 	 </NavigationContainer>
-      <View style={styles.container}>
-        <View>
-          <Text style={styles.daysText}>{this.state.currentDay}</Text>
-          <Text style={styles.timeText}>{this.state.currentTime}</Text>
-          {/* <Button title='Start' onPress={() => this.startTime()} />
-          <Button title='Stop' onPress={() => this.stopTime()} /> */}
-          <TaskList />
-        </View>
-      </View>
-      </ImageBackground>
     );
   }
 }
+
+
+// return (
+//   <ImageBackground source={require('./img/grid.png')} style={styles.image}>
+//     <NavigationContainer>
+//       <MyStack />
+//     </NavigationContainer>
+//     <View style={styles.container}>
+//       <View>
+//         <Text style={styles.daysText}>{this.state.currentDay}</Text>
+//         <Text style={styles.timeText}>{this.state.currentTime}</Text>
+//         {/* <Button title='Start' onPress={() => this.startTime()} />
+//           <Button title='Stop' onPress={() => this.stopTime()} /> */}
+//         <TaskList />
+//       </View>
+//     </View>
+//   </ImageBackground>
+// );
 
 const styles = StyleSheet.create({
   container: {
