@@ -3,7 +3,7 @@ import firestore from '@react-native-firebase/firestore';
 
 const TaskCollection = firestore().collection('Tasks');
 
-firestore()
+/*firestore()
   .collection('Tasks')
   .add({
     name: 'Math',
@@ -21,6 +21,6 @@ firestore()
   })
   .then(() => {
     console.log('User added!');
-  });
+  });*/
 
 export default TaskCollection;
