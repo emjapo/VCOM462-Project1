@@ -18,7 +18,7 @@ export default class TaskList extends Component {
 
   // gets data from Database
   async getTasks() {
-    //   addTask("Recess", 75, "#F28B66");
+      // addTask("Recess", 75, "#F28B66");
     // useEffect(() => {
     //     const subscriber = firestore()
     firestore()

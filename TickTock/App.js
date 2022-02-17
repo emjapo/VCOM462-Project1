@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, View, Text, StyleSheet, Platform, Button, ImageBackground, SafeAreaView, Alert, TextInput, onChangeText, TouchableOpacity  } from 'react-native';
-import AddTask from './components/AddTask';
 import Task from './components/Task';
+import AddTask from './components/AddTask';
 import TaskCollection from './api/TaskCollection';
 
 import firestore from '@react-native-firebase/firestore';
@@ -71,10 +71,6 @@ export default class App extends Component {
       am_pm = 'am';
     }
 
-    this.setState({ currentTime: hour + ':' + minutes + ':' + seconds + ' ' + am_pm });
-
-    this.daysArray.map((item, key) => {
-      if (key == new Date().getDay()) {
 
     this.setState({ currentTime: hour + ':' + minutes + ':' + seconds + ' ' + am_pm });
 
