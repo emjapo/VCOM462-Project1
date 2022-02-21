@@ -2,22 +2,37 @@ import React, { Component } from 'react';
 import { Form, FormItem } from 'react-native-form-component';
 import { AppRegistry, View, Text, StyleSheet, Platform, Button, ImageBackground, SafeAreaView, Alert, TextInput, onChangeText, TouchableOpacity } from 'react-native';
 import Task from './Task';
+import { Picker } from '@react-native-picker/picker';
 
 
 
 const AddTask = () => {
-  const [text, onChangeText] = React.useState("Useless Text");
+  const [text, setOther] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
+  const [taskName, setTaskName] = React.useState('Research');
   return (
     <ImageBackground source={require('./../img/grid.png')} style={styles.image}>
       <View style={styles.container}>
         <View>
+          <View>
+            <Picker
+              mode='dropdown'
+              selectedValue={taskName}
+              onValueChange={taskName => setTaskName(taskName)}>
+              <Picker.Item label="Research" value="Research" />
+              <Picker.Item label="Coding" value="Coding" />
+              <Picker.Item label="Teaching" value="Teaching" />
+            </Picker>
+            <Text>
+              Selected: {taskName}
+            </Text>
+          </View>
           <TextInput
 
             // Adding hint in Text Input using Place holder.
-            placeholder="Task Name"
+            placeholder="Other"
 
-            onChangeText={TextInputName => this.setState({ TextInputName })}
+            onChangeText={TextInputName => setOther({ TextInputName })}
 
 
 
@@ -29,7 +44,7 @@ const AddTask = () => {
             // Adding hint in Text Input using Place holder.
             placeholder="Goal Time"
 
-            onChangeText={TextInputEmail => this.setState({ TextInputEmail })}
+            onChangeText={TextInputEmail => onChangeNumber({ TextInputEmail })}
 
             keyboardType="numeric"
 
@@ -40,44 +55,35 @@ const AddTask = () => {
               Color </Text>
             <View style={styles.ColorButtonsTop}>
               <TouchableOpacity style={styles.orange}
-                onPress={() => Alert.alert('(I am a Button)')}>
+                onPress={() => Alert.alert({text})}>
 
-
-                         </TouchableOpacity>
-                          <TouchableOpacity style={styles.yellow}
-                                  onPress={() => Alert.alert('(I am a Button)')}>
 
               </TouchableOpacity>
+              <TouchableOpacity style={styles.yellow}
+                onPress={() => Alert.alert('(I am a Button)')}>
 
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.blue}
+                onPress={() => Alert.alert('(I am a Button)')}>
 
-                          <TouchableOpacity style={styles.blue}
-                                   onPress={() => Alert.alert('(I am a Button)')}>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.ColorButtonsBot}>
+              <TouchableOpacity style={styles.DarkBlue}
+                onPress={() => Alert.alert('(I am a Button)')}>
 
-                                    </TouchableOpacity>
-                           </View>
-                           <View style={styles.ColorButtonsBot}>
-                          <TouchableOpacity style={styles.DarkBlue}
-                                     onPress={() => Alert.alert('(I am a Button)')}>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.mint}
+                onPress={() => Alert.alert('(I am a Button)')}>
 
-                                     </TouchableOpacity>
-                          <TouchableOpacity style={styles.mint}
-                                     onPress={() => Alert.alert('(I am a Button)')}>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.DarkGreen}
+                onPress={() => Alert.alert('(I am a Button)')}>
 
-                                     </TouchableOpacity>
-                          <TouchableOpacity style={styles.DarkGreen}
-                                     onPress={() => Alert.alert('(I am a Button)')}>
-
-                                     </TouchableOpacity>
-
-
-
-                      </View>
-
-
-                    </View>
-
-                    <Button title="Insert Text Input Data to Server" onPress={() => Alert.alert('(I am Dying)')} color="#466874" />
-
+              </TouchableOpacity>
+            </View>
+          </View>
+          <Button title="Insert Text Input Data to Server" onPress={() => Alert.alert('(I am Dying)')} color="#466874" />
         </View>
       </View>
     </ImageBackground>
@@ -104,10 +110,10 @@ const styles = StyleSheet.create({
   ColorButtonsBot: {
     backgroundColor: "white",
     justifyContent: "center",
-     flexDirection: "row",
-     margin: "10%",
-     marginTop: "-20%",
-     paddingBottom: "10%",
+    flexDirection: "row",
+    margin: "10%",
+    marginTop: "-20%",
+    paddingBottom: "10%",
 
 
 
@@ -121,47 +127,47 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#fff'
 
-   },
-    yellow: {
-       backgroundColor: '#F1C48D',
-       width:80,
-       height:80,
-       borderRadius: 10,
-       borderWidth: 1,
-       borderColor: '#fff'
-      },
-       blue: {
-          backgroundColor: '#B0C7D9',
-          width:80,
-          height:80,
-          borderRadius: 10,
-          borderWidth: 1,
-          borderColor: '#fff'
-         },
-          DarkBlue: {
-             backgroundColor: '#466874',
-             width:80,
-             height:80,
-             borderRadius: 10,
-             borderWidth: 1,
-             borderColor: '#fff'
-            },
-             mint: {
-                backgroundColor: '#B8D9C6',
-                width:80,
-                height:80,
-                borderRadius: 10,
-                borderWidth: 1,
-                borderColor: '#fff'
-               },
-                DarkGreen: {
-                   backgroundColor: '#61756C',
-                   width:80,
-                   height:80,
-                   borderRadius: 10,
-                   borderWidth: 1,
-                   borderColor: '#fff'
-                  },
+  },
+  yellow: {
+    backgroundColor: '#F1C48D',
+    width: 80,
+    height: 80,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#fff'
+  },
+  blue: {
+    backgroundColor: '#B0C7D9',
+    width: 80,
+    height: 80,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#fff'
+  },
+  DarkBlue: {
+    backgroundColor: '#466874',
+    width: 80,
+    height: 80,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#fff'
+  },
+  mint: {
+    backgroundColor: '#B8D9C6',
+    width: 80,
+    height: 80,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#fff'
+  },
+  DarkGreen: {
+    backgroundColor: '#61756C',
+    width: 80,
+    height: 80,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#fff'
+  },
 
   text: {
     fontFamily: "sans-serif",
