@@ -86,8 +86,9 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         width: 80,
         height: 80,
-        marginLeft: 50,
-        marginTop: 5,
+        position: 'absolute',
+        right: 50,
+        marginTop: 8,
         backgroundColor: "white",
 
     },
@@ -98,10 +99,13 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         alignItems: 'flex-end',
         width: "10%",
-        height: "10%"
+        height: "10%",
+        position: 'absolute',
+        right: 15,
+
     },
     taskGrippyCol: {
-        paddingTop: 30,
+        paddingTop: 35,
         paddingLeft: 10,
         flexDirection: 'column',
         width: 15,
@@ -112,6 +116,8 @@ const styles = StyleSheet.create({
         width: 10,
         height: 10,
         borderRadius: 10,
-        backgroundColor: "#F2724F",
+        backgroundColor: "white",
+        opacity: .3
+
     },
 })
