@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import {Form, FormItem} from 'react-native-form-component';
 import {
@@ -18,7 +19,7 @@ import {useForm, Controller} from 'react-hook-form';
 import addTask from '../api/AddTaskToDB';
 
 
-const AddTask = () => {
+const AddTask = ({ navigation }) => {
   const [taskColor, setColor] = React.useState('');
 
   const {
@@ -36,6 +37,7 @@ const AddTask = () => {
   } /* this should redirect to task home task*/ 
 
   return (
+<ScrollView>
     <ImageBackground source={require('./../img/grid.png')} style={styles.image}>
       <View style={styles.container}>
         <View>
@@ -136,15 +138,22 @@ const AddTask = () => {
                 }></TouchableOpacity>
             </View>
           </View>
+// <<<<<<< navi
+//           <Button title="Insert Text Input Data to Server" onPress={() => navigation.navigate('TaskHome')} color="#466874" />
+//           </SafeAreaView>
+
 
           <Button
             title="Submit"
             onPress={handleSubmit(onSubmit)}
             color="#466874"
           />
+// >>>>>>> ErrorOnTimer
         </View>
       </View>
+
     </ImageBackground>
+</ScrollView>
   );
 };
 

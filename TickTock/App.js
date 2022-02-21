@@ -8,10 +8,11 @@ import firestore from '@react-native-firebase/firestore';
 import TaskList from './components/TaskList';
 import TaskHome from './components/pages/TaskHome';
 
-import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-const Stack = createStackNavigator();
+
+const Tab = createBottomTabNavigator();
 
 function NavigateScreens({ navigation }) {
   return (
@@ -31,11 +32,10 @@ function NavigateScreens({ navigation }) {
 
 function MyStack ()  {
 	return(
-		<Stack.Navigator>
-      <Stack.Screen name="Navigation" component={NavigateScreens} />
-			<Stack.Screen name="TaskHome" component={TaskHome} />
-      <Stack.Screen name='AddTask' component={AddTask} ></Stack.Screen>
-		</Stack.Navigator>
+		<Tab.Navigator>
+    <Tab.Screen name="TaskHome" component={TaskHome} />
+      <Tab.Screen name='AddTask' component={AddTask} />
+		</Tab.Navigator>
 	);
  }
 
@@ -113,17 +113,17 @@ export default class App extends Component {
       Alert.alert('It has been ' + (this.state.stopTime.hours - this.state.startTime.hours) + ':' + (this.state.stopTime.minutes - this.state.startTime.minutes) + ':' + (this.state.stopTime.seconds - this.state.startTime.seconds));
     });
   }
-  
 
-	
-	
+
+
+
 
   render() {
 
-    return (	
-	  <NavigationContainer>
-		<MyStack/>
-	 </NavigationContainer>
+    return (
+    	  <NavigationContainer>
+    		  <MyStack/>
+    	 </NavigationContainer>
     );
   }
 }
@@ -179,5 +179,3 @@ const styles = StyleSheet.create({
         backgroundColor: '#F3F0E9'
      },
 })
-
-
