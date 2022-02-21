@@ -139,17 +139,11 @@ const AddTask = ({ navigation }) => {
                 }></TouchableOpacity>
             </View>
           </View>
-{/* // <<<<<<< navi */} 
-{/* //           <Button title="Insert Text Input Data to Server" onPress={() => navigation.navigate('TaskHome')} color="#466874" />
-//           </SafeAreaView> */}
-
-
           <Button
             title="Submit"
             onPress={handleSubmit(onSubmit)}
             color="#466874"
           />
-{/* // >>>>>>> ErrorOnTimer */}
         </View>
       </View>
 
