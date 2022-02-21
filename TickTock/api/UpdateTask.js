@@ -4,16 +4,25 @@ import TaskCollection from './TaskCollection';
 
 
 
-async function updateTask(docID, name, goal, color) {
+async function updateTask(docID, name, goal, color, totalMins) {
     await TaskCollection.doc(docID).update({
         name: name,
         goal: goal,
         color: color,
+        totalMins: totalMins,
     }).then(() => {
         console.log('Task updated!');
     });
 }
 
+
+async function startTimer(docID) {
+    await TaskCollection.doc(docID).update({
+        start: true
+    }).then(() => {
+        console.log('timer started');
+    });
+}
 
 async function addTime(taskId, time) {
     // Create a reference to the post
@@ -28,8 +37,10 @@ async function addTime(taskId, time) {
         }
 
         transaction.update(taskReference, {
+            start: firestore.FieldValue.delete(),
             totalMins: taskSnapshot.data().totalMins + time,
         });
+        console.log("task Updated")
     });
 }
 
@@ -37,4 +48,4 @@ async function addTime(taskId, time) {
 //     .then(() => console.log('Post likes incremented via a transaction'))
 //     .catch(error => console.error(error));
 
-export { updateTask, addTime };
+export { updateTask, addTime, startTimer };

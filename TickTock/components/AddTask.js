@@ -1,21 +1,47 @@
-import React, { Component } from 'react';
-import { Form, FormItem } from 'react-native-form-component';
-import { AppRegistry, View, Text, StyleSheet, Platform, Button, ImageBackground, SafeAreaView, Alert, TextInput, onChangeText, TouchableOpacity,ScrollView } from 'react-native';
-import Task from './Task';
-import { Picker } from '@react-native-picker/picker';
+
+import React, {Component} from 'react';
+import {Form, FormItem} from 'react-native-form-component';
+import {
+  AppRegistry,
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+  Button,
+  ImageBackground,
+  SafeAreaView,
+  Alert,
+  TextInput,
+  onChangeText,
+  TouchableOpacity,
+} from 'react-native';
+import {useForm, Controller} from 'react-hook-form';
+import addTask from '../api/AddTaskToDB';
 
 
 const AddTask = ({ navigation }) => {
-  const [text, setOther] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
-  const [taskName, setTaskName] = React.useState('Research');
+  const [taskColor, setColor] = React.useState('');
+
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm({
+    defaultValues: {
+      taskName: '',
+      goal: '',
+    },
+  });
+  const onSubmit = data => {addTask(data.taskName, data.goal, taskColor.taskColor);
+    navigation.navigate('TaskHome');
+  } /* this should redirect to task home task*/ 
+
   return (
 <ScrollView>
     <ImageBackground source={require('./../img/grid.png')} style={styles.image}>
       <View style={styles.container}>
         <View>
-          <SafeAreaView>
-          <View>
+          {/* <View>
             <Picker
               mode='dropdown'
               selectedValue={taskName}
@@ -27,73 +53,109 @@ const AddTask = ({ navigation }) => {
             <Text>
               Selected: {taskName}
             </Text>
-          </View>
-          <TextInput
-
+          </View> */}
+          {/* <TextInput
             // Adding hint in Text Input using Place holder.
             placeholder="Other"
-
-            onChangeText={TextInputName => setOther({ TextInputName })}
-
-
-
+            onChangeText={TextInputName => setOther({TextInputName})}
             style={styles.input}
+          /> */}
+
+          <Controller
+            control={control}
+            rules={{
+              required: true,
+              maxLength: 30,
+            }}
+            render={({field: {onChange, onBlur, value}}) => (
+              <TextInput
+                placeholder="Task Name"
+                style={styles.input}
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+              />
+            )}
+            name="taskName"
           />
+          {errors.taskName && <Text>This is required.</Text>}
 
-          <TextInput
-
-            // Adding hint in Text Input using Place holder.
-            placeholder="Goal Time"
-
-            onChangeText={TextInputEmail => onChangeNumber({ TextInputEmail })}
-
-            keyboardType="numeric"
-
-            style={styles.input}
+          <Controller
+            control={control}
+            rules={{
+              required: true,
+              min: 5,
+              pattern: /[0-9]+/,
+            }}
+            render={({field: {onChange, onBlur, value}}) => (
+              <TextInput
+                placeholder="Goal Time"
+                keyboardType="numeric"
+                style={styles.input}
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+              />
+            )}
+            name="goal"
           />
+          {errors.goal && <Text>A number is required.</Text>}
+
           <View style={styles.color}>
-            <Text style={styles.text}>
-              Color </Text>
+            <Text style={styles.text}>Color </Text>
             <View style={styles.ColorButtonsTop}>
-              <TouchableOpacity style={styles.orange}
-                onPress={() => Alert.alert({text})}>
-
-
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.yellow}
-                onPress={() => Alert.alert('(I am a Button)')}>
-
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.blue}
-                onPress={() => Alert.alert('(I am a Button)')}>
-
-              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.orange}
+                onPress={() => 
+                  setColor({taskColor: "#F2724F"})
+                }></TouchableOpacity>
+              <TouchableOpacity
+                style={styles.yellow}
+                onPress={() =>
+                  setColor({taskColor: '#F1C48D'})
+                }></TouchableOpacity>
+              <TouchableOpacity
+                style={styles.blue}
+                onPress={() =>
+                  setColor({taskColor: '#B0C7D9'})
+                }></TouchableOpacity>
             </View>
             <View style={styles.ColorButtonsBot}>
-              <TouchableOpacity style={styles.DarkBlue}
-                onPress={() => Alert.alert('(I am a Button)')}>
-
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.mint}
-                onPress={() => Alert.alert('(I am a Button)')}>
-
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.DarkGreen}
-                onPress={() => Alert.alert('(I am a Button)')}>
-
-              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.DarkBlue}
+                onPress={() =>
+                  setColor({taskColor: '#466874'})
+                }></TouchableOpacity>
+              <TouchableOpacity
+                style={styles.mint}
+                onPress={() =>
+                  setColor({taskColor: '#B8D9C6'})
+                }></TouchableOpacity>
+              <TouchableOpacity
+                style={styles.DarkGreen}
+                onPress={() =>
+                  setColor({taskColor: '#61756C'})
+                }></TouchableOpacity>
             </View>
           </View>
-          <Button title="Insert Text Input Data to Server" onPress={() => navigation.navigate('TaskHome')} color="#466874" />
-          </SafeAreaView>
+// <<<<<<< navi
+//           <Button title="Insert Text Input Data to Server" onPress={() => navigation.navigate('TaskHome')} color="#466874" />
+//           </SafeAreaView>
+
+
+          <Button
+            title="Submit"
+            onPress={handleSubmit(onSubmit)}
+            color="#466874"
+          />
+// >>>>>>> ErrorOnTimer
         </View>
       </View>
 
     </ImageBackground>
 </ScrollView>
   );
-
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -103,25 +165,19 @@ const styles = StyleSheet.create({
   },
 
   ColorButtonsTop: {
-    backgroundColor: "white",
-    margin: "10%",
-    padding: "10%",
-    flexDirection: "row",
-    justifyContent: "center",
-
-
+    backgroundColor: 'white',
+    margin: '10%',
+    padding: '10%',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   ColorButtonsBot: {
-    backgroundColor: "white",
-    justifyContent: "center",
-    flexDirection: "row",
-    margin: "10%",
-    marginTop: "-20%",
-    paddingBottom: "10%",
-
-
-
-
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    margin: '10%',
+    marginTop: '-20%',
+    paddingBottom: '10%',
   },
   orange: {
     backgroundColor: '#F2724F',
@@ -129,8 +185,7 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff'
-
+    borderColor: '#fff',
   },
   yellow: {
     backgroundColor: '#F1C48D',
@@ -138,7 +193,7 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff'
+    borderColor: '#fff',
   },
   blue: {
     backgroundColor: '#B0C7D9',
@@ -146,7 +201,7 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff'
+    borderColor: '#fff',
   },
   DarkBlue: {
     backgroundColor: '#466874',
@@ -154,7 +209,7 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff'
+    borderColor: '#fff',
   },
   mint: {
     backgroundColor: '#B8D9C6',
@@ -162,7 +217,7 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff'
+    borderColor: '#fff',
   },
   DarkGreen: {
     backgroundColor: '#61756C',
@@ -170,39 +225,39 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff'
+    borderColor: '#fff',
   },
 
   text: {
-    fontFamily: "sans-serif",
+    fontFamily: 'sans-serif',
     fontSize: 18,
-    color: "gray",
+    color: 'gray',
   },
   form: {
-    color: "black"
+    color: 'black',
   },
   headerText: {
     fontSize: 30,
-    textAlign: "center",
+    textAlign: 'center',
     margin: 10,
     color: 'black',
-    fontWeight: "bold"
+    fontWeight: 'bold',
   },
   image: {
     width: '100%',
     height: '100%',
-    backgroundColor: "#F3F0E9",
-
+    backgroundColor: '#F3F0E9',
   },
   input: {
-    color: "white",
-    backgroundColor: "#B0C7D9",
-    margin: "5%",
+    color: 'white',
+    backgroundColor: '#B0C7D9',
+    margin: '5%',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff'
+    borderColor: '#fff',
   },
-
-
+  hidden: {
+    display: 'none',
+  },
 });
 export default AddTask;
