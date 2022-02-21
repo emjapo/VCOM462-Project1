@@ -19,9 +19,8 @@ import {Picker} from '@react-native-picker/picker';
 import {useForm, Controller} from 'react-hook-form';
 import addTask from '../api/AddTaskToDB';
 
+
 const AddTask = () => {
-  // const [text, setOther] = React.useState('Useless Text');
-  // const [number, onChangeNumber] = React.useState(null);
   const [taskColor, setColor] = React.useState('');
 
   const {
@@ -34,7 +33,8 @@ const AddTask = () => {
       goal: '',
     },
   });
-  const onSubmit = data => addTask(data.taskName, data.goal, taskColor.taskColor);
+  const onSubmit = data => {addTask(data.taskName, data.goal, taskColor.taskColor);
+  navigation.navigate('TaskHome');}
 
   return (
     <ImageBackground source={require('./../img/grid.png')} style={styles.image}>
