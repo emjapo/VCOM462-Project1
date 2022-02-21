@@ -14,6 +14,7 @@ import {
   TextInput,
   onChangeText,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import addTask from '../api/AddTaskToDB';
@@ -138,9 +139,9 @@ const AddTask = ({ navigation }) => {
                 }></TouchableOpacity>
             </View>
           </View>
-// <<<<<<< navi
-//           <Button title="Insert Text Input Data to Server" onPress={() => navigation.navigate('TaskHome')} color="#466874" />
-//           </SafeAreaView>
+{/* // <<<<<<< navi */} 
+{/* //           <Button title="Insert Text Input Data to Server" onPress={() => navigation.navigate('TaskHome')} color="#466874" />
+//           </SafeAreaView> */}
 
 
           <Button
@@ -148,7 +149,7 @@ const AddTask = ({ navigation }) => {
             onPress={handleSubmit(onSubmit)}
             color="#466874"
           />
-// >>>>>>> ErrorOnTimer
+{/* // >>>>>>> ErrorOnTimer */}
         </View>
       </View>
 
