@@ -34,7 +34,8 @@ const AddTask = () => {
     },
   });
   const onSubmit = data => {addTask(data.taskName, data.goal, taskColor.taskColor);
-  navigation.navigate('TaskHome');}
+    navigation.navigate('TaskHome');
+  } /* this should redirect to task home task*/ 
 
   return (
     <ImageBackground source={require('./../img/grid.png')} style={styles.image}>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, View, Text, StyleSheet, Platform, Button, Alert, TouchableOpacity, } from 'react-native';
 import PropTypes from 'prop-types';
+import defaultExport from '@react-native-firebase/firestore';
 import firestore from '@react-native-firebase/firestore';
 import { startTimer, addTime } from '../api/UpdateTask';
 
@@ -8,9 +9,9 @@ import { startTimer, addTime } from '../api/UpdateTask';
 
 
 export default class Task extends Component {
-    constructor(){
+    constructor() {
         super();
-        this.state = {startedTasks: {}, startTime:0 }
+        this.state = { startedTasks: {}, startTime: 0 }
     }
     static propTypes = {
         taskID: PropTypes.string,
@@ -55,7 +56,7 @@ export default class Task extends Component {
                     }
                 }
             });
-        
+
         // if (this.state.startedTasks.length == 0){
         //     startTimer(this.state.startedTasks[0]);
         //     let time = new Date.now();
@@ -87,12 +88,12 @@ export default class Task extends Component {
 
 
     render() {
-        return(
+        return (
             <View style={styles.taskContainer}>
-                <View style={[styles.task, {backgroundColor: this.props.color}]}>
+                <TouchableOpacity style={[styles.task, { backgroundColor: this.props.color }]} onPress={() => console.log(this.props.taskID)}>
                     <View>
-                    <Text style={styles.taskTitle}>{this.props.taskName}</Text>
-                    <Text style={styles.ElapsedTime}>{this.props.elapsedTime}</Text>
+                        <Text style={styles.taskTitle}>{this.props.taskName}</Text>
+                        <Text style={styles.ElapsedTime}>{this.props.elapsedTime}</Text>
                     </View>
                     <TouchableOpacity style={styles.button} onPress={this.Timer}  >
                         <Text style={styles.taskTime}>Start</Text>
@@ -111,7 +112,7 @@ export default class Task extends Component {
                         </View>
                     </View>
 
-                </View>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         borderColor: '#fff',
-    }, 
+    },
     taskTitle: {
         fontSize: 30,
         marginTop: 12,

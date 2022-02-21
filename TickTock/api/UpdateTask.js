@@ -4,11 +4,12 @@ import TaskCollection from './TaskCollection';
 
 
 
-async function updateTask(docID, name, goal, color) {
+async function updateTask(docID, name, goal, color, totalMins) {
     await TaskCollection.doc(docID).update({
         name: name,
         goal: goal,
         color: color,
+        totalMins: totalMins,
     }).then(() => {
         console.log('Task updated!');
     });
