@@ -14,8 +14,6 @@ import {
   onChangeText,
   TouchableOpacity,
 } from 'react-native';
-import Task from './Task';
-import {Picker} from '@react-native-picker/picker';
 import {useForm, Controller} from 'react-hook-form';
 import addTask from '../api/AddTaskToDB';
 

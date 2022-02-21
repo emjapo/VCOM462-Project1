@@ -14,8 +14,6 @@ import {
     onChangeText,
     TouchableOpacity,
 } from 'react-native';
-import Task from './Task';
-import { Picker } from '@react-native-picker/picker';
 import { useForm, Controller } from 'react-hook-form';
 import { updateTask } from '../../api/UpdateTask';
 
@@ -42,7 +40,7 @@ const EditTask = (props) => {
     }
 
     return (
-        <ImageBackground source={require('./../img/grid.png')} style={styles.image}>
+        <ImageBackground source={require('../../img/grid.png')} style={styles.image}>
             <View style={styles.container}>
                 <View>
                     <Controller

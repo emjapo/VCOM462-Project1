@@ -3,7 +3,9 @@ import { AppRegistry, View, Text, StyleSheet, Platform, Button, Alert, Touchable
 import PropTypes from 'prop-types';
 import defaultExport from '@react-native-firebase/firestore';
 import firestore from '@react-native-firebase/firestore';
+import { firebase } from '@react-native-firebase/firestore';
 import { startTimer, addTime } from '../api/UpdateTask';
+import TaskCollection from '../api/TaskCollection';
 
 
 
@@ -38,11 +40,26 @@ export default class Task extends Component {
     //         });
     // }
 
-    async Timer() {
+    async Timer(taskID) {
+        // const taskRef = TaskCollection.doc(taskID);
+
+        // try {
+        //     const taskDoc = await taskRef.get();
+        //     if (!taskDoc.exists) {
+        //         console.log(`The document for user ${taskID} does not exist`);
+        //     } else {
+        //         console.log(taskDoc);
+        //         const { token } = taskDoc.data();
+        //         console.log('The token is:', token);
+        //     }
+        // }
+        // catch (err) {
+        //     console.error(err);
+        // }
 
         firestore()
             .collection('Tasks')
-            .doc(this.props.taskID)
+            .doc(taskID)
             .get()
             .then(documentSnapshot => {
                 console.log('User exists: ', documentSnapshot.exists);
@@ -71,19 +88,22 @@ export default class Task extends Component {
 
     }
 
-    Stop(docID) {
-        let newTime = new Date.now();
+    Stop = (docID) => {
+        const newTime = new Date().getTime();
         let totalTime = newTime - this.state.startTime;
-        let minutes = Math.floor(totalTime / 60000);
+        let minutes = totalTime / 60000;
+        console.log("Minutes: ",minutes);
+        console.log("total time: ", totalTime)
+        console.log("to Minutes: ", totalTime / 60000)
         addTime(docID, minutes);
         this.setState({ startTime: 0 });
     }
 
 
-    Start(docID) {
+    Start = (docID) => {
         startTimer(docID);
-        let time = new Date.now();
-        this.setState({ startTime: time })
+        const newTime = new Date().getTime();
+        this.setState({ startTime: newTime })
     }
 
 
@@ -95,7 +115,7 @@ export default class Task extends Component {
                         <Text style={styles.taskTitle}>{this.props.taskName}</Text>
                         <Text style={styles.ElapsedTime}>{this.props.elapsedTime}</Text>
                     </View>
-                    <TouchableOpacity style={styles.button} onPress={this.Timer}  >
+                    <TouchableOpacity style={styles.button} onPress={() => this.Timer(this.props.taskID)}  >
                         <Text style={styles.taskTime}>Start</Text>
                     </TouchableOpacity>
 

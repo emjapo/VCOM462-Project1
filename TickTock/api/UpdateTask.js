@@ -40,6 +40,7 @@ async function addTime(taskId, time) {
             start: firestore.FieldValue.delete(),
             totalMins: taskSnapshot.data().totalMins + time,
         });
+        console.log("task Updated")
     });
 }
 
