@@ -16,11 +16,44 @@ import {
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { updateTask } from '../../api/UpdateTask';
+import firestore from '@react-native-firebase/firestore';
+import { firebase } from '@react-native-firebase/firestore';
+import { Route } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 
 
-const EditTask = (props) => {
-    const { taskID, name, goal, color, totalMins } = props;
-    const [taskColor, setColor] = React.useState(color);
+
+
+const EditTask = ({navigation, route}) => {
+    const taskID = route.params; // This is supposed to get a parameter from the route but I have tried everything from the documentation fro 2 hours and it will not work
+    // const taskID = useNavigationParam('taskID');
+    console.log(taskID);
+    const [taskName, setName] = React.useState('');
+    const [taskColor, setColor] = React.useState('');
+    const [taskGoal, setGoal] = React.useState('');
+    const [taskTotalMin, setTotalMin] = React.useState('');
+
+
+    const getTask = (newtaskID) => {
+
+        firestore()
+            .collection('Tasks')
+            .doc(newtaskID)
+            .get()
+            .then(documentSnapshot => {
+                console.log('Task exists: ', documentSnapshot.exists);
+                console.log(documentSnapshot);
+                if (documentSnapshot.exists) {
+                    let task = documentSnapshot.data();
+                   setName({taskName: task['name']});
+                   setColor({taskColor: task['color']});
+                   setGoal({taskGoal: task['goal']});
+                   setTotalMin({taskTotalMin: task['totalMins']});
+                }
+            });
+
+    }
 
     const {
         control,
@@ -28,9 +61,9 @@ const EditTask = (props) => {
         formState: { errors },
     } = useForm({
         defaultValues: {
-            taskName: name,
-            goal: goal,
-            totalMins: totalMins,
+            taskName: taskName,
+            goal: taskGoal,
+            totalMins: taskTotalMin,
         },
     });
     const onSubmit = data => {
@@ -38,6 +71,8 @@ const EditTask = (props) => {
         updateTask(taskID, data.taskName, data.goal, data.color, data.totalMins);
         navigation.navigate('TaskHome');
     }
+
+    getTask(taskID);
 
     return (
         <ImageBackground source={require('../../img/grid.png')} style={styles.image}>
@@ -51,11 +86,10 @@ const EditTask = (props) => {
                         }}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <TextInput
-                                // placeholder="Task Name"
                                 style={styles.input}
                                 onBlur={onBlur}
                                 onChangeText={onChange}
-                                defaultValue={name}
+                                defaultValue={taskName}
                                 value={value}
                             />
                         )}
@@ -77,7 +111,7 @@ const EditTask = (props) => {
                                 style={styles.input}
                                 onBlur={onBlur}
                                 onChangeText={onChange}
-                                defaultValue={goal}
+                                defaultValue={String(taskGoal)}
                                 value={value}
                             />
                         )}
@@ -138,7 +172,7 @@ const EditTask = (props) => {
                                 style={styles.input}
                                 onBlur={onBlur}
                                 onChangeText={onChange}
-                                defaultValue={totalMins}
+                                defaultValue={String(taskTotalMin)}
                                 value={value}
                             />
                         )}

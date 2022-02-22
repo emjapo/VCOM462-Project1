@@ -7,9 +7,11 @@ import TaskCollection from './api/TaskCollection';
 import firestore from '@react-native-firebase/firestore';
 import TaskList from './components/TaskList';
 import TaskHome from './components/pages/TaskHome';
+import EditTask from './components/pages/EditTask';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Route } from '@react-navigation/native';
 
 
 const Tab = createBottomTabNavigator();
@@ -34,7 +36,8 @@ function MyStack ()  {
 	return(
 		<Tab.Navigator>
     <Tab.Screen name="TaskHome" component={TaskHome} />
-      <Tab.Screen name='AddTask' component={AddTask} />
+    <Tab.Screen name='AddTask' component={AddTask} />
+      <Tab.Screen name='EditTask' component={EditTask} />
 		</Tab.Navigator>
 	);
  }

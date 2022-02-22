@@ -90,6 +90,7 @@ export default class TaskHome extends Component {
                         <Text style={styles.timeText}>{this.state.currentTime}</Text>
                         {/* <Button title='Start' onPress={() => this.startTime()} />
           <Button title='Stop' onPress={() => this.stopTime()} /> */}
+                        {/* <TaskList navigation={navigation} /> */}
                         <TaskList />
                     </View>
                 </View>
