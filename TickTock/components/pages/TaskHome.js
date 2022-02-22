@@ -3,8 +3,6 @@ import { AppRegistry, View, Text, StyleSheet, Platform, Button, ImageBackground,
 
 import TaskList from '../TaskList';
 
-
-
 export default class TaskHome extends Component {
     constructor() {
         super();

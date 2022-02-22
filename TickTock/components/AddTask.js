@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { Form, FormItem } from 'react-native-form-component';
-import { AppRegistry, View, Text, StyleSheet, Platform, Button, ImageBackground, SafeAreaView, Alert, TextInput, onChangeText, TouchableOpacity } from 'react-native';
+import { AppRegistry, View, Text, StyleSheet, Platform, Button, ImageBackground, SafeAreaView, Alert, TextInput, onChangeText, TouchableOpacity,ScrollView } from 'react-native';
 import Task from './Task';
 import { Picker } from '@react-native-picker/picker';
 
 
-
-const AddTask = () => {
+const AddTask = ({ navigation }) => {
   const [text, setOther] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
   const [taskName, setTaskName] = React.useState('Research');
   return (
+<ScrollView>
     <ImageBackground source={require('./../img/grid.png')} style={styles.image}>
       <View style={styles.container}>
         <View>
+          <SafeAreaView>
           <View>
             <Picker
               mode='dropdown'
@@ -83,10 +84,13 @@ const AddTask = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <Button title="Insert Text Input Data to Server" onPress={() => Alert.alert('(I am Dying)')} color="#466874" />
+          <Button title="Insert Text Input Data to Server" onPress={() => navigation.navigate('TaskHome')} color="#466874" />
+          </SafeAreaView>
         </View>
       </View>
+
     </ImageBackground>
+</ScrollView>
   );
 
 }
