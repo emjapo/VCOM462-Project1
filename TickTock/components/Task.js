@@ -19,46 +19,46 @@ import TaskCollection from '../api/TaskCollection';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import EditTask from './pages/EditTask';
-import { useNavigation } from '@react-navigation/native';
-import { Route } from '@react-navigation/native';
-import { useRoute } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {Route} from '@react-navigation/native';
+import {useRoute} from '@react-navigation/native';
 
-function GoToDetails({taskName, totalMins, elapsedTime, color, newtaskID}) {
-    const navigation = useNavigation();
-    const route = useRoute();
-  return (
-    <TouchableOpacity
-      onPress={() =>
-        navigation.navigate(EditTask, { 
-            params: { taskID: newtaskID },
-        })
-      }
-      style={[styles.task, {backgroundColor: color}]}>
-      <View>
-        <Text style={styles.taskTitle}>{taskName}</Text>
-        <Text style={styles.ElapsedTime}>Goal Time: {elapsedTime}</Text>
-        <Text style={styles.ElapsedTime}>Total Time: {totalMins} minutes</Text>
-      </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => Timer(newtaskID)}>
-        <Text style={styles.taskTime}>Start</Text>
-      </TouchableOpacity>
-      <View style={styles.taskGrippyGroup}>
-        <View style={styles.taskGrippyCol}>
-          <View style={styles.taskGrippy}></View>
-          <View style={styles.taskGrippy}></View>
-          <View style={styles.taskGrippy}></View>
-        </View>
-        <View style={styles.taskGrippyCol}>
-          <View style={styles.taskGrippy}></View>
-          <View style={styles.taskGrippy}></View>
-          <View style={styles.taskGrippy}></View>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-}
+
+
+// function GoToDetails({taskName, totalMins, elapsedTime, color, newtaskID}) {
+//   const navigation = useNavigation();
+//   const route = useRoute();
+//   return (
+//     <TouchableOpacity
+//       onPress={() =>
+//         navigation.navigate(EditTask, {
+//           params: {taskID: newtaskID},
+//         })
+//       }
+//       style={[styles.task, {backgroundColor: color}]}>
+//       <View>
+//         <Text style={styles.taskTitle}>{taskName}</Text>
+//         <Text style={styles.ElapsedTime}>Goal Time: {elapsedTime}</Text>
+//         <Text style={styles.ElapsedTime}>Total Time: {totalMins} minutes</Text>
+//       </View>
+//       <TouchableOpacity style={styles.button} onPress={() => Timer(newtaskID)}>
+//         <Text style={styles.taskTime}>Start</Text>
+//       </TouchableOpacity>
+//       <View style={styles.taskGrippyGroup}>
+//         <View style={styles.taskGrippyCol}>
+//           <View style={styles.taskGrippy}></View>
+//           <View style={styles.taskGrippy}></View>
+//           <View style={styles.taskGrippy}></View>
+//         </View>
+//         <View style={styles.taskGrippyCol}>
+//           <View style={styles.taskGrippy}></View>
+//           <View style={styles.taskGrippy}></View>
+//           <View style={styles.taskGrippy}></View>
+//         </View>
+//       </View>
+//     </TouchableOpacity>
+//   );
+// }
 
 export default class Task extends Component {
   constructor() {
@@ -90,7 +90,6 @@ export default class Task extends Component {
   // }
 
   async Timer(taskID) {
-
     firestore()
       .collection('Tasks')
       .doc(taskID)
@@ -107,13 +106,12 @@ export default class Task extends Component {
           }
         }
       });
-
   }
 
   Stop = docID => {
     const newTime = new Date().getTime();
     let totalTime = newTime - this.state.startTime;
-    let minutes = totalTime / 60000;
+    let minutes = Math.floor(totalTime / 60000);
     console.log('Minutes: ', minutes);
     console.log('total time: ', totalTime);
     console.log('to Minutes: ', totalTime / 60000);
@@ -126,12 +124,42 @@ export default class Task extends Component {
     const newTime = new Date().getTime();
     this.setState({startTime: newTime});
   };
+  
 
   render() {
     return (
       <View style={styles.taskContainer}>
-        <GoToDetails taskName={this.props.taskName} totalMins={this.props.totalMins} elapsedTime={this.props.elapsedTime} color={this.props.color} taskID={this.props.taskID}>
-        </GoToDetails>
+        <TouchableOpacity
+          style={[styles.task, {backgroundColor: this.props.color}]}
+                onPress={() =>
+                    navigation.navigate(EditTask, {
+                        params: { taskID: this.props.taskID },
+                    })
+                }>
+          <View>
+            <Text style={styles.taskTitle}>{this.props.taskName}</Text>
+                    <Text style={styles.ElapsedTime}>Goal Time: {this.props.elapsedTime} mins</Text>
+                    <Text style={styles.ElapsedTime}>Total Time: {this.props.totalMins} mins</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.Timer(this.props.taskID)}>
+            <Text style={styles.taskTime}>Start</Text>
+          </TouchableOpacity>
+
+          <View style={styles.taskGrippyGroup}>
+            <View style={styles.taskGrippyCol}>
+              <View style={styles.taskGrippy}></View>
+              <View style={styles.taskGrippy}></View>
+              <View style={styles.taskGrippy}></View>
+            </View>
+            <View style={styles.taskGrippyCol}>
+              <View style={styles.taskGrippy}></View>
+              <View style={styles.taskGrippy}></View>
+              <View style={styles.taskGrippy}></View>
+            </View>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -169,7 +197,7 @@ const styles = StyleSheet.create({
   },
   ElapsedTime: {
     color: 'white',
-    width: 100,
+    width: 180,
     paddingLeft: 5,
   },
   button: {
